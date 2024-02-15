@@ -8,6 +8,7 @@ const { SEPOLIA_URL, ACCOUNT_KEY } = process.env
 
 const config: HardhatUserConfig = {
   solidity: "0.8.4",
+  defaultNetwork: "sepolia",
   networks: {
     sepolia: {
       chainId: 11155111,
