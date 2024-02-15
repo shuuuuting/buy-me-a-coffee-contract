@@ -10,7 +10,7 @@ interface Memo {
 // Return the Ether balance of a given address
 async function getBalance(address: any) {
   const balanceBigInt = await ethers.provider.getBalance(address)
-  return ethers.formatEther(balanceBigInt)
+  return ethers.utils.formatEther(balanceBigInt)
 }
 
 // Log the Ether balances for a list of addresses
@@ -42,19 +42,16 @@ async function main() {
   const buyMeATea = await BuyMeATea.deploy()
 
   // Deploy the contract
-  await buyMeATea.waitForDeployment()
-  const buyMeATeaAddress = await buyMeATea.getAddress()
-  console.log("BuyMeATea deployed to:", buyMeATeaAddress)
+  await buyMeATea.deployed()
+  console.log("BuyMeATea deployed to:", buyMeATea.address)
 
   // Check balances before the coffee purchase
-  const ownerAddress = await owner.getAddress()
-  const tipperAddress = await tipper.getAddress()
-  const addresses = [ownerAddress, tipperAddress, buyMeATeaAddress]
+  const addresses = [owner.address, tipper.address, buyMeATea.address]
   console.log("== start ==")
   await printBalances(addresses)
 
   // Buy the owner a few coffees
-  const tip = {value: ethers.parseEther("1")}
+  const tip = {value: ethers.utils.parseEther("1")}
   await buyMeATea.connect(tipper).buyTea("Carolina", "You're the best!", tip)
   await buyMeATea.connect(tipper2).buyTea("Vitto", "Nice to meet u!", tip)
   await buyMeATea.connect(tipper3).buyTea("Kay", "I'm rich :)", tip)

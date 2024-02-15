@@ -4,9 +4,8 @@ async function main() {
   const BuyMeATea = await ethers.getContractFactory("BuyMeATea")
   const buyMeATea = await BuyMeATea.deploy()
 
-  await buyMeATea.waitForDeployment()
-  const buyMeATeaAddress = await buyMeATea.getAddress()
-  console.log("BuyMeATea deployed to:", buyMeATeaAddress)
+  await buyMeATea.deployed()
+  console.log("BuyMeATea deployed to:", buyMeATea.address)
 }
 
 // We recommend this pattern to be able to use async/await everywhere
