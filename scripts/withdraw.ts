@@ -10,7 +10,7 @@ async function getBalance(provider: any, address: any) {
 
 async function main() {
   // Get the contract that has been deployed to Sepolia
-  const contractAddress="0xd0e6cd03e98f61a4ee3b666115c9b8d9b3c98096"
+  const contractAddress="0xe331Dd38436Ad4876cA4A79FcfB969b77015d94D"
   const contractABI = abi.abi
 
   // Get the node connection and wallet connection

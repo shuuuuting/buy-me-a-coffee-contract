@@ -39,6 +39,13 @@ contract BuyMeATea {
     }
 
     /**
+     * @dev fetches owner address
+     */
+    function getOwner() public view returns (address) {
+        return owner;
+    }
+
+    /**
      * @dev fetches all stored memos
      */
     function getMemos() public view returns (Memo[] memory) {
@@ -78,8 +85,7 @@ contract BuyMeATea {
     function withdraw() public {
         require(msg.sender == owner, "You aren't the owner!");
 
-        emit Withdrawal(address(this).balance, block.timestamp);
-
         owner.transfer(address(this).balance);
+        emit Withdrawal(address(this).balance, block.timestamp);
     }
 }
